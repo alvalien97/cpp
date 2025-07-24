@@ -18,9 +18,11 @@
 PhoneBook::PhoneBook() : totalContacts(0), index(0) {}
 
 void PhoneBook::addContact() {
-    std::cout << "Adding contact #" << totalContacts + 1 << std::endl;
-    contacts[index].setContact();
-    
+    std::cout << "Adding contact #" << index + 1 << std::endl;
+    if (!contacts[index].setContact()) {
+        std::cout << "Contact creation aborted.\n";
+        return;
+    }
     if (totalContacts < 8)
         totalContacts++;
     else
@@ -30,7 +32,6 @@ void PhoneBook::addContact() {
 
 void PhoneBook::searchContacts() const {
     int displayCount;
-    int realIndex;
     
     if (totalContacts == 0){
         std::cout << "PhoneBook is empty. Add some contacts first." << std::endl;
@@ -44,13 +45,14 @@ void PhoneBook::searchContacts() const {
     else
         displayCount = 8;
     for(int i = 0; i < displayCount; i++){
-        realIndex = (index + i) % 8;
-        contacts[realIndex].displayShort(i);
+        contacts[i].displayShort(i);
     }
-
     std::cout << "Enter index to view details: ";
     std::string input;
-    std::getline(std::cin, input);
+    if (!std::getline(std::cin, input)) {
+        std::cout << "End of input detected. Exiting search." << std::endl;
+        return;
+    }
 
     if (input.length() != 1 || !isdigit(input[0])) {
         std::cout << "Invalid input. Must be a digit between 0 and " << totalContacts - 1 << "." << std::endl;
@@ -62,7 +64,5 @@ void PhoneBook::searchContacts() const {
         std::cout << "Index out of range." << std::endl;
         return;
     }
-
-    int realIndex = (index + i) % 8;
-    contacts[realIndex].displayFull();
+    contacts[i].displayFull();
 }

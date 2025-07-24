@@ -26,7 +26,7 @@ int main(int argc, char **argv)
     int i = 1;
     if (argc == 1)
     {
-        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
+        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
         return (0);
     }
     while (i < argc)
@@ -37,9 +37,8 @@ int main(int argc, char **argv)
             to_uppercase(argv[i][j]);
             j++;
         }
-        if (i < argc - 1)
-            std::cout << ' ';
         i++;
     }
+    std::cout << "\n";
     return(0);
 }

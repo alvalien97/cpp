@@ -27,7 +27,7 @@ class Contact {
         std::string getNonEmptyInput(const std::string& prompt);
 
     public:
-        void setContact();
+        bool setContact();
         void displayShort(int index) const;
         void displayFull() const;    
     };

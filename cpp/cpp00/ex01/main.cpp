@@ -14,20 +14,6 @@
 #include <iostream>
 #include <string>
 
-std::string to_uppercase(std::string c)
-{
-    int i;
-
-    i = 0;
-    while (c[i])
-    {
-        if (c[i] >= 'a' && c[i] <= 'z')
-            c[i] = c[i] - 32;  
-        i++;
-    }
-    return c;
-}
-
 int main(){
     PhoneBook phonebook;
     std::string command;
@@ -35,8 +21,10 @@ int main(){
     while (true)
     {
         std::cout << "Enter: (ADD, SEARCH, EXIT): ";
-        std::getline(std::cin, command);
-        command = to_uppercase(command);
+        if (!std::getline(std::cin, command)) {
+            std::cout << "\nSignal detected; exiting" << std::endl;
+            break;
+        }
         if (command == "ADD")
             phonebook.addContact();
         else if(command == "SEARCH")

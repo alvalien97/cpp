@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOK_HPP
+#ifndef PHONEBOOK_HPP
 #define PHONEBOOK_HPP
 
 #include "Contact.hpp"
